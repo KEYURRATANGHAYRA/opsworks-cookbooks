@@ -5,7 +5,14 @@ apps = search(:aws_opsworks_app, "deploy:true") rescue []
 Chef::Log.info "Found #{apps.size} apps to deploy on the stack. Assuming they are all Node.JS apps."
 
 apps.each do |app|
-	Chef::Log.info "Deploying #{app["shortname"]}."
-	Chef::Log.info "Deploying #{app["app_source"]}."
-	Chef::Log.info "Deploying #{app["environment"]["myenvvar"]}."
+	Chef::Log.info "SHORTNAME #{app["shortname"]}."
+	Chef::Log.info "APP SOURCE #{app["app_source"]}."
+	Chef::Log.info "ENV VARIABLE #{app["environment"]["myenvvar"]}."
+	powershell_script "register #{app["shortname"]}" do
+		code <<-EOC
+			$shortName = '#{app['shortnamme']}'
+			$envVar = '#{app['environment']['myenvvar']}'
+			echo $shortName >> c:/shortname.txt
+			echo $envVar >> c:/envvar.txt
+		EOC
 end
