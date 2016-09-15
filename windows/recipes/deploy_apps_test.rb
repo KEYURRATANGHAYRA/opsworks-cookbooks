@@ -15,4 +15,5 @@ apps.each do |app|
 			echo $shortName >> c:/shortname.txt
 			echo $envVar >> c:/envvar.txt
 		EOC
+	end
 end
