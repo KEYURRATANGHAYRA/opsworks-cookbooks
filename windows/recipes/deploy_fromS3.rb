@@ -7,7 +7,7 @@ end
 # Actual copy 
 Chef::Log.info("******Copy file from S3******")
 Chef::Log.level = :debug
-ruby_block "download-object" do
+ruby_block 'envvarblock' do
   block do
   	query = Chef::Search::Query.new
   	app = query.search(:aws_opsworks_app, "deploy:true").first
