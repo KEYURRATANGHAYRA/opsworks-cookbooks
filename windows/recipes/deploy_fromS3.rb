@@ -9,15 +9,16 @@ Chef::Log.info("******Copy file from S3******")
 Chef::Log.level = :debug
 ruby_block 'envvarblock' do
   block do
-  	query = Chef::Search::Query.new
-  	app = query.search(:aws_opsworks_app, "deploy:true")
+  	#query = Chef::Search::Query.new
+  	#app = query.search(:aws_opsworks_app, "deploy:true")
+  	app = search(:aws_opsworks_app, "deploy:true") rescue []
   	# First log line
   	#Chef::Log.info "Deploying #{app["shortname"]}."
-  	s3region = app[0][:environment][:S3REGION]
-    s3bucket = app[0][:environment][:BUCKET]
-	s3folder = app[0][:environment][:FOLDER]
-    s3filename = app[0][:environment][:FILENAME]
-    pclocalpath = app[0][:environment][:LOCALPATH]
+  	s3region = app[:environment][:S3REGION]
+    s3bucket = app[:environment][:BUCKET]
+	s3folder = app[:environment][:FOLDER]
+    s3filename = app[:environment][:FILENAME]
+    pclocalpath = app[:environment][:LOCALPATH]
 
     Chef::Log.info "***** #{s3region} *****"
     Chef::Log.info "***** #{s3bucket} *****"
