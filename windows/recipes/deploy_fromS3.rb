@@ -9,9 +9,9 @@ Chef::Log.info("******Copy file from S3******")
 Chef::Log.level = :debug
 ruby_block 'envvarblock' do
   block do
-  	#query = Chef::Search::Query.new
-  	#app = query.search(:aws_opsworks_app, "deploy:true")
-  	app = search(:aws_opsworks_app, "deploy:true") rescue []
+  	query = Chef::Search::Query.new
+  	app = query.search(:aws_opsworks_app, "deploy:true").each
+  	#app = search(:aws_opsworks_app, "deploy:true") rescue []
   	# First log line
   	#Chef::Log.info "Deploying #{app["shortname"]}."
   	s3region = app[:environment][:S3REGION]
