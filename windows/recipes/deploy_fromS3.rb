@@ -10,21 +10,22 @@ Chef::Log.level = :debug
 ruby_block 'envvarblock' do
   block do
   	query = Chef::Search::Query.new
-  	app = query.search(:aws_opsworks_app, "deploy:true").each
+  	apps = query.search(:aws_opsworks_app, "deploy:true")
   	#app = search(:aws_opsworks_app, "deploy:true") rescue []
   	# First log line
   	#Chef::Log.info "Deploying #{app["shortname"]}."
-  	s3region = app[:environment][:S3REGION]
-    s3bucket = app[:environment][:BUCKET]
-	s3folder = app[:environment][:FOLDER]
-    s3filename = app[:environment][:FILENAME]
-    pclocalpath = app[:environment][:LOCALPATH]
+  	apps.each do |app| 
+	  	s3region = app[:environment][:S3REGION]
+	    s3bucket = app[:environment][:BUCKET]
+		s3folder = app[:environment][:FOLDER]
+	    s3filename = app[:environment][:FILENAME]
+	    pclocalpath = app[:environment][:LOCALPATH]
 
-    Chef::Log.info "***** #{s3region} *****"
-    Chef::Log.info "***** #{s3bucket} *****"
-    Chef::Log.info "***** #{s3folder} *****"
-    Chef::Log.info "***** #{s3filename} *****"
-    Chef::Log.info "***** #{pclocalpath} *****"
-
+	    Chef::Log.info "***** #{s3region} *****"
+	    Chef::Log.info "***** #{s3bucket} *****"
+	    Chef::Log.info "***** #{s3folder} *****"
+	    Chef::Log.info "***** #{s3filename} *****"
+	    Chef::Log.info "***** #{pclocalpath} *****"
+	end
   end
 end
