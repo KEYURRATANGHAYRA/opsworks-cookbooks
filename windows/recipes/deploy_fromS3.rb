@@ -10,7 +10,7 @@ Chef::Log.level = :debug
 ruby_block 'envvarblock' do
   block do
   	query = Chef::Search::Query.new
-  	app = query.search(:aws_opsworks_app, "deploy:true").first
+  	app = query.search(:aws_opsworks_app, "deploy:true")
   	# First log line
   	#Chef::Log.info "Deploying #{app["shortname"]}."
   	s3region = app[0][:environment][:S3REGION]
