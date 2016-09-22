@@ -27,7 +27,7 @@ ruby_block 'envvarblock' do
 	    #Chef::Log.info "***** #{s3filename} *****"
 	    #Chef::Log.info "***** #{pclocalpath} *****"
 
-	    Chef::Log.info "***** #{app[:environment][:S3REGION]} *****"
+	    Chef::Log.info "***** #{app[0][:environment][:S3REGION]} *****"
 	end
   end
 end
