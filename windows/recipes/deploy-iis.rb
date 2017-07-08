@@ -4,7 +4,7 @@ app_dir = "c:\\inetpub\\wwwroot"
 # Remove files from inetpub
 powershell_script 'clear_inetpub' do
 	code <<-EOH 
-	Remove-Item #app_dir\* -recurse
+	Remove-Item #{app_dir}\* -recurse
 	EOH
 end
 
